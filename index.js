@@ -63,20 +63,27 @@ app.post('/api/persons', (req, res) => {
   const {name, number} = req.body;
 
   if (!name || !number) {
-    res.status(400).end();
+    res.status(400).json({error: "name or number is missing"});
 
     return;
   }
 
-  const person = {
+  const person = persons.find(person => person.name === name);
+  if (person) {
+    res.status(400).json({error: "name must be unique"});
+
+    return;
+  }
+
+  const newPerson = {
     id: Math.floor(Math.random() * 9999999),
     name,
     number,
   };
 
-  persons = persons.concat(person);
+  persons = persons.concat(newPerson);
 
-  res.json(person);
+  res.json(newPerson);
 })
 
 const PORT = 3001;

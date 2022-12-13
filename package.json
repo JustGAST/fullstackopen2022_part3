@@ -1,0 +1,19 @@
+{
+  "name": "phonebook",
+  "version": "0.0.1",
+  "description": "Part 3 phonebook exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustGAST/fullstackopen2022_part3.git"
+  },
+  "author": "Aleksei Rozhnov <justgast@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustGAST/fullstackopen2022_part3/issues"
+  },
+  "homepage": "https://github.com/JustGAST/fullstackopen2022_part3#readme"
+}

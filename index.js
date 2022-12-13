@@ -25,6 +25,12 @@ const notes = [
   }
 ];
 
+app.get('/info', (req, res) => {
+  const entries = notes.length;
+  const time = new Date().toString();
+
+  res.send(`Phonebook has info for ${entries} people.<br><br>${time}`)
+})
 app.get('/api/notes', (req, res) => res.json(notes));
 
 const PORT = 3001;

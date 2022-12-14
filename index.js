@@ -1,9 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const app = express();
 
-
+app.use(cors());
 app.use(express.json());
 morgan.token('body', req => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
@@ -39,7 +40,6 @@ app.get('/info', (req, res) => {
 });
 
 app.get('/api/persons', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.json(persons);
 });
 
@@ -97,7 +97,7 @@ const unknownEndpoint = (req, res) => {
 
 app.use(unknownEndpoint);
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`App listens on port ${PORT}`);
 });

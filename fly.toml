@@ -1,11 +1,13 @@
-# fly.toml file generated for fso-phonebook-backend-justgast on 2022-12-14T22:59:02+03:00
+# fly.toml file generated for wild-fire-9350 on 2022-12-15T16:10:13+03:00
 
-app = "fso-phonebook-backend-justgast"
+app = "wild-fire-9350"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
 [env]
+  PORT = "8080"
+
 
 [experimental]
   allowed_public_ports = []

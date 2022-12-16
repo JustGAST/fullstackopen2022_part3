@@ -20,7 +20,7 @@ const url = `mongodb+srv://fullstackopen:${password}@cluster0.szbcl.mongodb.net/
 const personSchema = new mongoose.Schema({
   name: String,
   number: String,
-})
+});
 
 const Person = mongoose.model('Person', personSchema);
 

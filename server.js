@@ -60,22 +60,23 @@ app.post('/api/persons', (req, res) => {
     return;
   }
 
-  const person = persons.find(person => person.name === name);
-  if (person) {
-    res.status(400).json({error: "name must be unique"});
+  Person.find({name: name}).then(person => {
+    if (person.length > 0) {
+      res.status(400).json({error: "name must be unique"});
 
-    return;
-  }
+      return;
+    }
 
-  const newPerson = {
-    id: Math.floor(Math.random() * 9999999),
-    name,
-    number,
-  };
+    const newPerson = new Person({
+      name,
+      number,
+    });
 
-  persons = persons.concat(newPerson);
-
-  res.json(newPerson);
+    newPerson.save()
+      .then(person => {
+        res.json(person);
+      })
+  });
 });
 
 const unknownEndpoint = (req, res) => {

@@ -20,7 +20,6 @@ app.get('/info', (req, res) => {
 
     res.send(`Phonebook has info for ${entries} people.<br><br>${time}`)
   });
-
 });
 
 app.get('/api/persons', (req, res) => {
@@ -29,26 +28,29 @@ app.get('/api/persons', (req, res) => {
   });
 });
 
-app.get('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id);
+app.get('/api/persons/:id', (req, res, next) => {
+  const id = req.params.id;
 
-  Person.findById(id).then(person => {
-    if (!person) {
-      res.statusMessage = 'No person with such id';
-      res.status(404).end();
+  Person.findById(id)
+    .then(person => {
+      if (!person) {
+        res.status(404).end();
 
-      return;
-    }
+        return;
+      }
 
-    res.json(person);
-  });
+      res.json(person);
+    })
+    .catch(error => next(error));
 });
 
 app.delete('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id);
-  persons = persons.filter(person => person.id !== id)
+  const id = req.params.id;
 
-  res.status(204).end();
+  Person.findByIdAndDelete(id)
+    .then(() => {
+      res.status(204).end();
+    });
 });
 
 app.post('/api/persons', (req, res) => {
